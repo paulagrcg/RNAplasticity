@@ -23,13 +23,13 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 	probstarg0dict = defaultdict(dict)
 	probstarg1dict = defaultdict(dict)
 	meanfitness = defaultdict(float)
-	switchnum = 0
+	#switchnum = 0
 	listseqprobs = {}
-	targetgenosgen = {}
-	adaptedphenonum = {}
-	meanentropygenos = {}
-	meanevolvgnd = {}
-	meanrobustg = {}
+	#targetgenosgen = {}
+	#adaptedphenonum = {}
+	#meanentropygenos = {}
+	#meanevolvgnd = {}
+	#meanrobustg = {}
 	seqstargetlist = []
 	seqscommonlist = []
 	extreme0list = []
@@ -41,15 +41,15 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 	seqsex0Counter = Counter(extreme0)
 	seqsex1Counter = Counter(extreme1)
 
-	for i in range(1,generations+1):
-		listseqprobs[i] = defaultdict(dict)
-		targetgenosgen[i] = 0
-		adaptedphenonum[i] = 0
-		meanevolvgnd[i] = 0
-		meanentropygenos[i] = 0
-		meanrobustg[i] = 0
+	#for i in range(1,generations+1):
+		#listseqprobs[i] = defaultdict(dict)
+		#targetgenosgen[i] = 0
+		#adaptedphenonum[i] = 0
+		#meanevolvgnd[i] = 0
+		#meanentropygenos[i] = 0
+		#meanrobustg[i] = 0
 	#adapted regime
-	countadapt = 0 
+	#countadapt = 0 
 
 	for i in range(1,generations+1): # i is generation number
 		targetgenos = 0
@@ -62,12 +62,8 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 		       
 		else: genos = newpop 
 
-		#for geno in genos:
-		#   listgenosint = [] 
-		#	listgenosint.append(int(''.join([stn[n] for n in geno])))
 		popgenos[i] = [int(''.join([stn[n] for n in geno])) for geno in genos] #taken from i-1 mutated population
-		#print(popgenos[i])
-		#print(seqscommon)
+		
 		#types of genos data collection (in frequencies)
 		freq = Counter(popgenos[i])
 		countseqstarget = sum(freq[seq] for seq in freq if seqstargetCounter[seq] == 1)
@@ -84,6 +80,7 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 
 		folds = {}
 		probs = {}
+
 		#data of population phenotype ensembles and TPs probs
 		for j in range(0,Npop):
 			phvsprobseq = extractnormalisedprobs(gpmap[genos[j]],L)
@@ -95,18 +92,19 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 			probs[j] = list(phvsprobseq.values())
 
 		#data collection of target genotypes and evolvability
-		for g in genos:
-			if g in genostargetset:targetgenos +=1
-			meanentropygenos[i] += entropy[g]/len(genos)
-			meanevolvgnd[i] += evgND[g]/len(genos)
-			meanrobustg[i] += rhogND[g]/len(genos)
+		#for g in genos:
+		#	if g in genostargetset:targetgenos +=1
+		#	meanentropygenos[i] += entropy[g]/len(genos)
+		#	meanevolvgnd[i] += evgND[g]/len(genos)
+		#	meanrobustg[i] += rhogND[g]/len(genos)
 		   #meanevolvgnd[i]+=evolvabilitygND(gpmap,g,4,12)[g]/len(genos)
 
-		targetgenosgen[i] = targetgenos
+		#targetgenosgen[i] = targetgenos
 
 		#1) random fitness
 		#2) hamming fitness 
-		#3) random fitness with targets inverse gax/min
+		#3) hamming fitness with power 2
+		#4) random fitness with targets inverse gax/min
 
 		if i%gengap==0: #change target every gengap generations
 			switchnum +=1
@@ -123,7 +121,7 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 					for f in phs: #don't change all the random values from before just change the targetphenos 
 						if f == targetpheno: foldfitdict[targetpheno] = 1.0
 						elif f == '.'*L: foldfitdict['.'*L] = 0.0
-						elif fitlands == 3 and f == targetpheno_old: foldfitdict[targetpheno_old] = 0.0 #random fitness with targets inverse max/min
+						elif fitlands == 4 and f == targetpheno_old: foldfitdict[targetpheno_old] = 0.0 #random fitness with targets inverse max/min
 						elif f not in foldfitdict.keys(): foldfitdict[f] = np.random.random_sample() #uniform between 0 and 1
 			else:#hamming fitness new fitness dict
 				foldfitdict = defaultdict(float)
@@ -132,7 +130,7 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 				for f in foldfitdict.keys():
 					if f == '.'*L: foldfitdict['.'*L] = 0.0
 					if fitlands==2: foldfitdict[f] = fitness_hamming(f,targetpheno)
-					if fitlands==3: foldfitdict[f] = fitness_hamming_power(f,targetpheno)
+					if fitlands==3: foldfitdict[f] = fitness_hamming(f,targetpheno)**2
 
 		else: #no target flip, just add new phenotypes into fitness landscape 
 			for phs in folds.values():
@@ -145,9 +143,9 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 						if fitlands==2: #hamming fitness
 							if f == '.'*L: foldfitdict['.'*L] = 0.0
 							else: foldfitdict[f] = fitness_hamming(f,targetpheno)
-						if fitlands==3:
+						if fitlands==3: #hamming with power 2
 							if f== '.'*L: foldfitdict['.'*L] = 0.0
-							else: foldfitdict[f] = fitness_hamming_power(f,targetpheno)
+							else: foldfitdict[f] = fitness_hamming(f,targetpheno)**2
 						if fitlands == 4:#random fitness with targets inverse max/min
 							if f == targetpheno: foldfitdict[targetpheno] = 1.0
 							elif f == '.'*L: foldfitdict['.'*L] = 0.0
@@ -160,7 +158,7 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 		probstarg0 = {}
 		probstarg1 = {}
 		count = 0
-		cadapt = 0
+	
 		for ng,phs,ps in zip(genos,folds.values(),probs.values()):
 			plasticfitness = 0 
 			maxfitness = 0
@@ -199,22 +197,19 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, genostargetset, seqscommon,extr
 
 		#sampling of new population 
 		newpop = [random.choices(choices, weights=list(probRWS.values()), k=1)[0] for num in range(0,Npop)]
-		#for j in range(0,Npop): newpop.append(random.choices(choices, weights=list(probRWS.values()), k=1)[0])  
 		     
 		#mutations for population i+1
 		newpop = [mutation(seq, mu) for seq in newpop]
-		#for j in range(0,Npop):
-		#	seq = newpop[j]
-		#	newpop[j] = mutation(seq,mu) #mutate member j with rate mu per base 
+	
 	probstarg0dict[i] = probstarg0
 	probstarg1dict[i] = probstarg1
-	#return meanrobustg, meanentropygenos, meanfitness,adaptedphenonum,targetgenosgen, probstarg0dict, probstarg1dict, listseqprobs, popgenos, meanevolvgnd #, indices #add foldfitdict to check fitnesses 
+
 	return meanfitness,seqstargetlist,seqscommonlist,extreme0list,extreme1list,otherlist
 if __name__ == "__main__":
 	
 	parameters = {}
 	pair = int(sys.argv[1])
-	fitlands = int(sys.argv[2])#1.random 2.hamming 3.random with inverse
+	fitlands = int(sys.argv[2])#1.random 2.hamming 3. hamming w power 2 4.random with inverse
 	samplenum = int(sys.argv[3])
 	plasticoption = int(sys.argv[4])
 	gengap = int(sys.argv[5])
@@ -256,22 +251,11 @@ if __name__ == "__main__":
 	seqscommon = stringtoint(np.load(path + "seqscommon.npy"))
 	seqstarget = stringtoint(np.load(path + "seqstarget_"+str(minprob)+"_"+str(maxprob)+".npy"))
 
-	#seq_extreme_0_max = np.load(path + "seq_trueextreme_0_max.npy")
-	#seq_extreme_1_max = np.load(path + "seq_trueextreme_1_max.npy")
-	#probs_extreme_0_max = np.load(path + "/probs_trueextreme_0_max.npy")
-	#probs_extreme_1_max = np.load(path + "/probs_trueextreme_1_max.npy")
-
-
-	#with open("/rds/user/pg520/hpc-work/entropy.pkl","rb") as f: entropy = pickle.load(f)
-	#with open("/rds/user/pg520/hpc-work/evgND.pkl","rb") as f: evgND = pickle.load(f)
-	#with open("/rds/user/pg520/hpc-work/rhogND.pkl","rb") as f: rhogND = pickle.load(f)
+	#in case we want to do quantities plug in actual dictionaries
 	entropy = defaultdict(float)
 	evgND = defaultdict(float)
 	rhogND = defaultdict(float)
 	
-	#initial population
-	#print("initoption:", initoption)
-	#print("extremeoption:", extremeoption)
 
 	initpop = []
 	if initoption == 0:
@@ -290,9 +274,6 @@ if __name__ == "__main__":
 			indexseq = list(seqscommon).index(seq)
 			if seq not in seqstarget: val == False
 		initpop = (random.choice([0,1]),seq)
-	#print('targetoption and genotype start:', initpop)
-
-	#meanrobust, meanentropy, meanfitness, adaptedphenonum, targetgenosgen, probstarg0dict, probstarg1dict, listseqprobs, popgenos, meanevolgnd = evodyn(rhogND=rhogND, evgND=evgND, entropy=entropy,targets=phenopair,initpop=initpop, genostargetset=seqstarget, seqscommon= seqscommon, samplenum = samplenum, plasticoption = plasticoption, gengap = gengap, L=12, gpmap = gpmap, mu = mu, generations = generations, Npop = Npop, fitlands = fitlands)
 	
 	meanfitness,seqstargetlist,seqscommonlist,extreme0list,extreme1list,otherlist = evodyn(rhogND=rhogND, evgND=evgND, entropy=entropy,targets=phenopair,initpop=initpop, genostargetset=seqstarget, seqscommon= seqscommon, extreme0 = seqstrueextreme0, extreme1 = seqstrueextreme1, samplenum = samplenum, plasticoption = plasticoption, gengap = gengap, L=12, gpmap = gpmap, mu = mu, generations = generations, Npop = Npop, fitlands = fitlands)
 	
