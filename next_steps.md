@@ -6,3 +6,11 @@
 4. Compare the abundance of orange + green vs. axis + noise regimes. Analyze the boundary between them using the variables axis, mu, and delta t. Plot the regimes.
 5. Delete all unnecessary data and keep only the means.
 6. Include standard errors in the regime plot.
+
+## Model Ideas
+
+Optimization model? How can I get the regime boundary or the estimation of when the target sequences or seqscommon will be overpowering. 
+Fluctuating environments with RNA GP map - circadian clock? It would save "energy" to have RNAs that can do several functions.
+
+is my stable state in the optimal fitness max analogous to steady state out-of-equilibrium?
+What is the non-equilibrium driving force?
