@@ -1,5 +1,5 @@
 # RNA plasticity 
-- Data: organised by Figure
+-Data: organised by Figure
 
 Data points per generation:
 
@@ -29,4 +29,4 @@ gmapfunctions, phenotypesearchfinal, and targetpairs and data_genotype_targetpai
 
 evodyn_seqs.ipynb is a notebook used to produce plots and test data.
 
-- Plots: directory with .png of plots
+-Plots: directory with .png of plots
