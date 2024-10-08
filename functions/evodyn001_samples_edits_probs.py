@@ -30,14 +30,12 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, seqscommon,extreme0, extreme1, 
         probstarg1dict = defaultdict(dict)
         foldfitdict = defaultdict(float)
         seqscommonCounter = Counter(seqscommon)
-        #seqstargetCounter = Counter(seqstarget)
         seqsex0Counter = Counter(extreme0)
         seqsex1Counter = Counter(extreme1)
         meanprobs0 = np.zeros(generations)
         meanprobs1 = np.zeros(generations)
         meanprobs0seqscom = np.zeros(generations)
         meanprobs1seqscom = np.zeros(generations)
-        #seqstargetlist = np.zeros(generations)
         seqscommonlist = np.zeros(generations)
         extreme0list = np.zeros(generations)
         extreme1list = np.zeros(generations)
@@ -83,14 +81,7 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, seqscommon,extreme0, extreme1, 
                         folds[j] = list(phvsprobseq.keys())
                         probs[j] = list(phvsprobseq.values())
 
-                #data collection of target genotypes and quantities
-                #for g in genos:
-                #       if g in genostargetset:targetgenos +=1
-                #       meanentropygenos[i] += entropy[g]/len(genos)
-                #       meanevolvgnd[i] += evgND[g]/len(genos)
-                #       meanrobustg[i] += rhogND[g]/len(genos)
-                   #meanevolvgnd[i]+=evolvabilitygND(gpmap,g,4,12)[g]/len(genos)
-
+                
                 #1) random fitness
                 #2) hamming fitness 
                 #3) random fitness with targets inverse gax/min
@@ -201,7 +192,6 @@ def evodyn(rhogND,evgND,entropy,targets,initpop, seqscommon,extreme0, extreme1, 
                 #mutations for population i+1
                 newpop = [mutation(seq, mu) for seq in newpop]
 
-        #return meanfitness,seqstargetlist,seqscommonlist,extreme0list,extreme1list,otherlist,probstarg0dict,probstarg1dict,meanprobs0,meanprobs1
         return meanfitness,seqscommonlist,extreme0list,extreme1list,otherlist,probstarg0end,probstarg1end,meanprobs0seqscom,meanprobs1seqscom,meanprobs0,meanprobs1,alphalist
 if __name__ == "__main__":
         pair = int(sys.argv[1])

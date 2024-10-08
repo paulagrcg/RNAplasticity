@@ -78,25 +78,7 @@ if __name__ == "__main__":
                                         sum_seqscommon = np.sum(df['seqscommon'][5000:])
                                         sum_other =  np.sum(df['extreme0'][5000:]) + np.sum(df['extreme1'][5000:]) + np.sum(df['other'][5000:])
                                         regime_ratio[mu,gengap] = float(sum_seqscommon/sum_other)
-                                        """
-                                        dictintegral = defaultdict(float)
-                                        for name in column_names:
-                                            y = df[name][generations//2:generations]
-                                            sort_indices = np.argsort(x)
-                                            #print(y)
-                                            x_sorted = x[sort_indices + num_rows // 2 ]
-                                            y_sorted = y[sort_indices + num_rows // 2]
-                                            f = interp1d(x_sorted, y_sorted, kind='linear')
-                                            x_interp = np.linspace(min(x_sorted), max(x_sorted), 1000)
-                                            y_interp = f(x_interp)
-                                            integral = simps(y_interp, x_interp)
-                                            dictintegral[name] = integral
-                                            sum_seqscommon = dictintegral['seqscommon'] 
-                                            sum_other =  dictintegral['extreme0'] + dictintegral['extreme1'] + dictintegral['other']
-                                            if sum_other == 0: print(dir_name)
-                                            regime_ratio[mu,gengap] = float(sum_seqscommon/sum_other)
-                                        """   
-
+                                      
         pathx = path +"regime_maps_plasticoption/"
         if not os.path.isdir(pathx): os.mkdir(pathx)
 
