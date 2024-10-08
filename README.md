@@ -19,7 +19,7 @@ Data points per generation:
 - phenopairs.pkl is an initial dictionary with targetpairs from which we select the pair 130 (key is 130) for the example in Fig.2.
 
 - RNA12 ND GP map data such as folddict (keys are secondary structures and values are lists of sequences and Botlzmann probability corresponding to that structure) or dictRNA12tot (the full ND GP map) is in https://universityofcambridgecloud-my.sharepoint.com/:f:/r/personal/pg520_cam_ac_uk/Documents/NDgpmaps2022/Paper/RNA12/Datatot?csf=1&web=1&e=yzqaOi
-- 
+  
 -Functions: 
 
 - evodyn001_* are .py files for Fig.2 example targetpair. 
