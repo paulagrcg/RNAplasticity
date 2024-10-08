@@ -1,6 +1,6 @@
 # RNA plasticity 
 
--Data: organised by Figure
+**data** folder: organised by Figure
 
 Data points per generation:
 
