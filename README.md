@@ -1,5 +1,4 @@
 # RNA plasticity 
-doi: https://doi.org/10.1101/2024.10.02.614758 
 
 -Data: organised by Figure
 
