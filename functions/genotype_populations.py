@@ -14,8 +14,8 @@ def seqs_probs_total(folddict,pheno0,pheno1):
 	probs1 = list(np.float_(list(seqsprobs1[:,1])))
                  
 	return seqs0,seqs1,probs0,probs1
-
-def seqs_probs_common(seqs0,seqs1,probs0,probs1):
+ 
+def seqs_probs_common(seqs0,seqs1,probs0,probs1): #plastic genotypes
 	seqscommon = list(set(seqs0) & set(seqs1))
 	indices_common_0 = [seqs0.index(x) for x in seqscommon]
 	probs_common_0 = [probs0[ind0] for ind0 in indices_common_0]
