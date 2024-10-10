@@ -1,4 +1,6 @@
-# RNA plasticity 
+# Phenotypic plasticity can be an evolutionary response to fluctuating environments
+
+preprint doi: https://doi.org/10.1101/2024.10.02.614758 
 
 **data** folder: organised by Figure
 
@@ -20,7 +22,7 @@ Data points per generation:
 
 - RNA12 ND GP map data such as folddict (keys are secondary structures and values are lists of sequences and Boltzmann probability corresponding to that structure) or dictRNA12tot (the full ND GP map) is in https://universityofcambridgecloud-my.sharepoint.com/:f:/r/personal/pg520_cam_ac_uk/Documents/NDgpmaps2022/Paper/RNA12/Datatot?csf=1&web=1&e=yzqaOi
   
--Functions: 
+-**functions** folder: 
 
 - evodyn001_* are .py files for Fig.2 example targetpair. 
 - evodyn_regimes_sweep_* are .py files dealing with the targetpairs from different categories. (cc, cs, ss) (0,1,2)
@@ -32,4 +34,4 @@ gmapfunctions, phenotypesearchfinal, and targetpairs and data_genotype_targetpai
 
 evodyn_seqs.ipynb is a notebook used to produce plots and test data.
 
--Plots: directory with .png of plots
+-**plots** folder: .png files of plots
