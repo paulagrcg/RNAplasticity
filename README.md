@@ -35,4 +35,6 @@ gmapfunctions, phenotypesearchfinal, and targetpairs and data_genotype_targetpai
 
 evodyn_seqs.ipynb is a notebook used to produce plots and test data.
 
+functionalRNAplots.ipynb: produce plot for functional RNA. 
+
 -**plots** folder: .png files of plots
