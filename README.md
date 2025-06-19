@@ -1,6 +1,6 @@
 # RNA plasticity emerges as an evolutionary response to fluctuating environments
 
-**data** folder: organised by Figure
+**data** folder: for all results except fRNA, organised by Figure
 
 Data points per generation:
 
