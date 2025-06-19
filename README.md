@@ -22,8 +22,8 @@ Data points per generation:
 
 - RNA12 ND GP map data such as folddict (keys are secondary structures and values are lists of sequences and Boltzmann probability corresponding to that structure) or dictRNA12tot (the full ND GP map) is in https://universityofcambridgecloud-my.sharepoint.com/:f:/r/personal/pg520_cam_ac_uk/Documents/NDgpmaps2022/Paper/RNA12/Datatot?csf=1&web=1&e=yzqaOi
 - sequence.fasta: download from https://dbarchive.biosciencedbc.jp/data/frnadb/LATEST/Sequence_Data/?C=D;O=A from sequence.zip or from link below
-- selected_for_analysis: download from https://universityofcambridgecloud-my.sharepoint.com/:f:/r/personal/pg520_cam_ac_uk/Documents/RNAplasticitydata?csf=1&web=1&e=s2CC20
-  
+- the sitescanning fRNA data for 10000 and 5000 samples is in https://universityofcambridgecloud-my.sharepoint.com/:f:/r/personal/pg520_cam_ac_uk/Documents/RNAplasticitydata?csf=1&web=1&e=s2CC20
+
 -**functions** folder: 
 
 - evodyn001_* are .py files for Fig.2 example targetpair. 
@@ -34,8 +34,3 @@ Data points per generation:
 
 gmapfunctions, phenotypesearchfinal, and targetpairs and data_genotype_targetpairs deal with categorising targetpairs according to NSS and Hamming distance as well as producing their genotype populations
 
-evodyn_seqs.ipynb is a notebook used to produce plots and test data.
-
-functionalRNAplots.ipynb: produce plot for functional RNA. 
-
--**plots** folder: .png files of plots
