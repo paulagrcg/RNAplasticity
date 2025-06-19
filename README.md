@@ -1,6 +1,4 @@
-# Phenotypic plasticity can be an evolutionary response to fluctuating environments
-
-preprint doi: https://doi.org/10.1101/2024.10.02.614758 
+# RNA plasticity emerges as an evolutionary response to fluctuating environments
 
 **data** folder: organised by Figure
 
